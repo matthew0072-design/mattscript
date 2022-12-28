@@ -6,34 +6,37 @@ import fs from 'fs';
 
 
 // structure of a post
-//type Post = {
-  //  data:{
-        // each post has a parameter key that takes the value of a string
-      //  [key: string] : string
-    //};
-    // each post will include the post content associated with its parameter key
-    //content: string
-//}
+type Post = {
+   data:{
+   //     each post has a parameter key that takes the value of a string
+       [key: string] : string
+    };
+ //   each post will include the post content associated with its parameter key
+    content: string
+}
 
 // path to our list of available posts
-const POSTS_PATH = join(process.cwd(),'_posts');
+export const POSTS_PATH = join(process.cwd(),'_posts');
 
-export function getPostsFilePaths(){
+export function getPostsFilePaths() {
+    
     return fs.readdirSync(POSTS_PATH).filter((path) => /\.mdx?$/.test(path))
     
 }
 
 // getting a single post
-// export function getPost(slug:string):Post {
+export function getPost(slug:string):Post {
     
-//     const fullPath = join(POSTS_PATH,`${slug}.mdx`);
+    const fullPath = join(POSTS_PATH,`${slug}.mdx`);
     
-//     const fileContents = fs.readFileSync(fullPath,'utf-8');
+    const fileContents = fs.readFileSync(fullPath,'utf8');
     
-//     const {data,content} = matter(fileContents);
+
+    const {data,content} = matter(fileContents);
     
-//     return { data,content};
-// }
+    
+    return { data,content};
+}
 
 // load the post items
 export function getPostItems(filePath:string, fields:string[] = []){
@@ -44,7 +47,9 @@ export function getPostItems(filePath:string, fields:string[] = []){
 
     const fileContents = fs.readFileSync(fullPath,"utf8");
 
+    
     const { data, content } = matter(fileContents);
+
     
     type Items = {
         [key: string]: string
@@ -78,6 +83,7 @@ export function getPostItems(filePath:string, fields:string[] = []){
 export function getAllPosts(fields: string[] = []) {
     
     const filePaths = getPostsFilePaths();
+
     
     const posts = filePaths.map((filePath) => getPostItems(filePath, fields)).sort((post1, post2) => post1.date > post2.date ? -1 : 1);
     

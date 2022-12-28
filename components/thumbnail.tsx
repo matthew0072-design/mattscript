@@ -17,7 +17,8 @@ const Thumbnail = ({ title, src, slug}: Props) => {
     
         src={src}
         alt={`Thumbnail cover image ${title}`}
-    
+        width ={200}
+        height ={200}
         />
     );
 

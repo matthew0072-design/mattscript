@@ -1,5 +1,5 @@
 
-type Post =   {
+export interface IPOST {
     slug: string;
     date: string;
     thumbnail: string;
@@ -9,4 +9,3 @@ type Post =   {
     
 }
 
-export default Post

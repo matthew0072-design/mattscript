@@ -2,15 +2,16 @@ import Head from 'next/head'
 import Header from '../components/Header'
 import PostPreview from '../components/post-preview'
 import type { NextPage, GetStaticProps } from 'next'
-import Post from '../types/post'
+import { IPOST } from '../types/post'
 import Link from 'next/link'
 import { getAllPosts } from '../utils/mdxUtils'
 
 type Props = {
-  posts: Post[]
+  posts: IPOST[]
 }
 
 const Home = ({ posts }: Props) => {
+
   return (
     <div className="">
       <Head>
@@ -19,7 +20,7 @@ const Home = ({ posts }: Props) => {
       </Head>
 
       <main className=''>
-        <Header />
+        
               
               <h1>Technical Articles</h1>
               <div>
